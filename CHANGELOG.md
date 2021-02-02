@@ -1,3 +1,7 @@
+## [0.1.2] - February 1, 2021
+
+* Added the `+` operator to [IterableUtilities].
+
 ## [0.1.1] - February 1, 2021
 
 * Moved [equals] from [SetUtilities] to [IterableUtilities], renamed
