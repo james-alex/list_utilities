@@ -4,11 +4,18 @@ import 'package:test/test.dart';
 import 'package:list_utilities/list_utilities.dart';
 
 void main() {
-  group('List', () {
+  group('ListUtilities', () {
     test('random', () {
       final list = <int>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
       while (list.isNotEmpty) {
         list.remove(list.random());
+      }
+    });
+
+    test('removeRandom', () {
+      final list = <int>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+      while (list.isNotEmpty) {
+        list.removeRandom();
       }
     });
 
@@ -22,6 +29,28 @@ void main() {
         list.removeNull();
         expect(list.length, equals(100 - nullValues));
       }
+    });
+
+    test('removeFirst', () {
+      final list = <int>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+      for (var i = 1; i <= 10; i++) {
+        final first = list.first;
+        expect(list.removeFirst(), equals(first));
+        expect(list.length, equals(10 - i));
+      }
+      expect(list.isEmpty, equals(true));
+    });
+
+    test('removeFirstWhere', () {
+      final list = <int>[0, 1, 2, 3, 4];
+      list.removeFirstWhere((value) => value.isOdd);
+      expect(list, orderedEquals(<int>[0, 2, 3, 4]));
+    });
+
+    test('removeLastWhere', () {
+      final list = <int>[0, 1, 2, 3, 4];
+      list.removeLastWhere((value) => value.isOdd);
+      expect(list, orderedEquals(<int>[0, 1, 2, 4]));
     });
 
     test('resizeAndFill', () {
@@ -71,6 +100,31 @@ void main() {
       list.removeFromEnd(5);
       expect(list.length, equals(0));
     });
+
+    test('equals', () {
+      final lists = <List<int>>[
+        [1, 2, 3, 4, 5],
+        [6, 7, 8, 9, 10],
+        [5, 4, 3, 2, 1],
+        [10, 9, 8, 7, 6],
+      ];
+
+      for (var i = 0; i < lists.length; i++) {
+        for (var j = 0; j < lists.length; j++) {
+          final listsAreEqual = lists[i].matches(lists[j]);
+          if (i == j || (i.isEven && j.isEven) || (i.isOdd && j.isOdd)) {
+            expect(listsAreEqual, equals(true));
+            if (i != j) {
+              expect(lists[i].matches(lists[j], ordered: true), equals(false));
+            } else {
+              expect(lists[i].matches(lists[j], ordered: true), equals(true));
+            }
+          } else {
+            expect(listsAreEqual, equals(false));
+          }
+        }
+      }
+    });
   });
 
   group('SetUtilities', () {
@@ -81,12 +135,31 @@ void main() {
       {10, 9, 8, 7, 6},
     ];
 
+    test('random', () {
+      final numbers = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+      while (numbers.isNotEmpty) {
+        numbers.remove(numbers.random());
+      }
+    });
+
+    test('removeRandom', () {
+      final numbers = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+      while (numbers.isNotEmpty) {
+        numbers.removeRandom();
+      }
+    });
+
     test('equals', () {
       for (var i = 0; i < sets.length; i++) {
         for (var j = 0; j < sets.length; j++) {
-          final setsAreEqual = sets[i].equals(sets[j]);
+          final setsAreEqual = sets[i].matches(sets[j]);
           if (i == j || (i.isEven && j.isEven) || (i.isOdd && j.isOdd)) {
             expect(setsAreEqual, equals(true));
+            if (i != j) {
+              expect(sets[i].matches(sets[j], ordered: true), equals(false));
+            } else {
+              expect(sets[i].matches(sets[j], ordered: true), equals(true));
+            }
           } else {
             expect(setsAreEqual, equals(false));
           }
@@ -95,7 +168,9 @@ void main() {
     });
 
     test('+', () {
-      sets.reduce((a, b) => a + b).equals({1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+      sets
+          .reduce((a, b) => a + b)
+          .matches({1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, ordered: true);
     });
   });
 }
