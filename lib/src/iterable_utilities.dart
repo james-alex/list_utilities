@@ -39,6 +39,25 @@ extension IterableUtilities<T> on Iterable<T> {
     return true;
   }
 
+  /// Returns a new [Iterable] of the same type as `this` with [other]'s
+  /// elements appended to the end.
+  Iterable<T> operator +(Iterable<T> other) {
+    assert(other != null);
+
+    Iterable<T> iterable;
+
+    if (this is Set<T>) {
+      iterable = Set<T>.from(this)..addAll(other);
+    } else if (this is List<T>) {
+      iterable = List<T>.from(this)..addAll(other);
+    } else {
+      throw UnsupportedError(
+          'This iterable must be a [List] or a [Set] to use the `+` operator.');
+    }
+
+    return iterable;
+  }
+
   /// Returns a random [int] within the range of this list's indexes.
   int _getRandomIndex(int seed) => Random(seed).nextInt(length);
 }
