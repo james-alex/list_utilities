@@ -2,6 +2,22 @@ import 'iterable_utilities.dart';
 
 /// /// Extends [List] with additional basic methods.
 extension ListUtilities<T> on List<T> {
+  /// Returns a new list containing random elements from this list.
+  ///
+  /// [count] is the number of elements that will be returned.
+  List<T> getRandom(int count, [int seed]) {
+    assert(isNotEmpty, 'The list must not be empty.');
+    assert(count != null && count > 0 && count <= length);
+
+    final indexes = List<int>.generate(length, (index) => index);
+    final randomIndexes = <int>[];
+    for (var i = 0; i < length; i++) {
+      randomIndexes.add(indexes.removeRandom());
+    }
+
+    return List<T>.generate(count, (index) => elementAt(randomIndexes[index]));
+  }
+
   /// Removes and returns a random value from this list.
   T removeRandom([int seed]) {
     assert(isNotEmpty, 'The list must not be empty.');
