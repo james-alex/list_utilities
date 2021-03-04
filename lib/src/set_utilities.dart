@@ -26,6 +26,22 @@ extension SetUtilities<T> on Set<T> {
     return element;
   }
 
+  /// Removes and returns the first element in this set.
+  T removeFirst() {
+    assert(isNotEmpty, 'The set must not be empty.');
+    final element = first;
+    remove(first);
+    return element;
+  }
+
+  /// Removes and returns the last element in this set.
+  T removeLast() {
+    assert(isNotEmpty, 'The set must not be empty.');
+    final element = last;
+    remove(last);
+    return element;
+  }
+
   /// Returns a new [Set] from `this` with [other]'s elements
   /// appended to the end.
   Set<T> operator +(Iterable<T> other) {
