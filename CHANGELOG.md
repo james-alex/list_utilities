@@ -1,4 +1,4 @@
-## [0.1.2] - March 3, 2021
+## [0.1.3] - March 3, 2021
 
 * Added the [getRandom], [transform], [transformAll],
 and [count] methods to [ListUtilities].
