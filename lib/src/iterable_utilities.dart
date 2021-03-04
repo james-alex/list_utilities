@@ -3,7 +3,7 @@ import 'dart:math';
 /// Extends [Iterable] with additional basic methods.
 extension IterableUtilities<T> on Iterable<T> {
   /// Returns a random value from the iterable.
-  T random([int seed]) {
+  T random([int? seed]) {
     assert(isNotEmpty, 'The iterable must not be empty.');
     return elementAt(_getRandomIndex(seed));
   }
@@ -14,9 +14,6 @@ extension IterableUtilities<T> on Iterable<T> {
   /// If [ordered] is `true`, the elements must be in the same order
   /// in both iterables for this to return `true`.
   bool matches(Iterable<T> other, {bool ordered = false}) {
-    assert(other != null);
-    assert(ordered != null);
-
     if (length != other.length) {
       return false;
     }
@@ -42,8 +39,6 @@ extension IterableUtilities<T> on Iterable<T> {
   /// Returns a new [Iterable] of the same type as `this` with [other]'s
   /// elements appended to the end.
   Iterable<T> operator +(Iterable<T> other) {
-    assert(other != null);
-
     Iterable<T> iterable;
 
     if (this is Set<T>) {
@@ -59,5 +54,5 @@ extension IterableUtilities<T> on Iterable<T> {
   }
 
   /// Returns a random [int] within the range of this list's indexes.
-  int _getRandomIndex(int seed) => Random(seed).nextInt(length);
+  int _getRandomIndex(int? seed) => Random(seed).nextInt(length);
 }

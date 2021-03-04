@@ -5,9 +5,9 @@ extension ListUtilities<T> on List<T> {
   /// Returns a new list containing random elements from this list.
   ///
   /// [count] is the number of elements that will be returned.
-  List<T> getRandom(int count, [int seed]) {
+  List<T> getRandom(int count, [int? seed]) {
     assert(isNotEmpty, 'The list must not be empty.');
-    assert(count != null && count > 0 && count <= length);
+    assert(count > 0 && count <= length);
 
     final indexes = List<int>.generate(length, (index) => index);
     final randomIndexes = <int>[];
@@ -19,7 +19,7 @@ extension ListUtilities<T> on List<T> {
   }
 
   /// Removes and returns a random value from this list.
-  T removeRandom([int seed]) {
+  T removeRandom([int? seed]) {
     assert(isNotEmpty, 'The list must not be empty.');
     final element = random(seed);
     remove(element);
@@ -34,22 +34,17 @@ extension ListUtilities<T> on List<T> {
 
   /// Removes the first element in this list that satisfies [test].
   bool removeFirstWhere(_Test<T> test) {
-    assert(test != null);
-
     for (var element in this) {
       if (test(element)) {
         remove(element);
         return true;
       }
     }
-
     return false;
   }
 
   /// Removes the last element in this list that satisfies [test].
   bool removeLastWhere(_Test<T> test) {
-    assert(test != null);
-
     for (var i = length - 1; i >= 0; i--) {
       final element = this[i];
       if (test(element)) {
@@ -57,22 +52,21 @@ extension ListUtilities<T> on List<T> {
         return true;
       }
     }
-
     return false;
   }
 
   /// Removes the number of elements defined by [count],
   /// starting from [index].
   void removeFrom(int index, int count) {
-    assert(index != null && index >= 0 && index < length);
-    assert(count != null && count >= 0 && count <= length - index);
+    assert(index >= 0 && index < length);
+    assert(count >= 0 && count <= length - index);
     removeRange(index, index + count);
   }
 
   /// Removes the number of elements defined by [count] from the end
   /// of the list.
   void removeFromEnd(int count) {
-    assert(count != null && count >= 0 && count <= length);
+    assert(count >= 0 && count <= length);
     removeRange(length - count, length);
   }
 
@@ -80,8 +74,6 @@ extension ListUtilities<T> on List<T> {
   /// if [resizeBy] is positive, otherwise removing elements if [resizeBy]
   /// is negative.
   void resizeAndFill(int resizeBy, T fill) {
-    assert(resizeBy != null);
-
     if (resizeBy.isNegative) {
       removeFromEnd(-resizeBy);
     } else {
@@ -93,9 +85,6 @@ extension ListUtilities<T> on List<T> {
   /// [generator] if [resizeBy] is positive, otherwise removing elements
   /// if [resizeBy] is negative.
   void resizeAndGenerate(int resizeBy, _Generator<T> generator) {
-    assert(resizeBy != null);
-    assert(generator != null);
-
     if (resizeBy.isNegative) {
       removeFromEnd(-resizeBy);
     } else {
@@ -105,16 +94,12 @@ extension ListUtilities<T> on List<T> {
 
   /// Updates the element at [index] to the value returned by [transformer].
   void transform(int index, _Transformer<T> transformer) {
-    assert(index != null && index >= 0 && index < length);
-    assert(transformer != null);
-
+    assert(index >= 0 && index < length);
     this[index] = transformer(this[index]);
   }
 
   /// Updates every element in the list to the value returned by [transformer].
   void transformAll(_Transformer<T> transformer) {
-    assert(transformer != null);
-
     for (var i = 0; i < length; i++) {
       this[i] = transformer(this[i]);
     }

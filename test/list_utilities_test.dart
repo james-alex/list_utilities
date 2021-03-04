@@ -30,7 +30,7 @@ void main() {
 
       for (var i = 0; i < 100; i++) {
         final list =
-            List<int>.generate(100, (index) => random.nextBool() ? i : null);
+            List<int?>.generate(100, (index) => random.nextBool() ? i : null);
         final nullValues = list.where((element) => element == null).length;
         list.removeNull();
         expect(list.length, equals(100 - nullValues));
