@@ -102,6 +102,32 @@ extension ListUtilities<T> on List<T> {
       addAll(List<T>.generate(resizeBy, generator));
     }
   }
+
+  /// Updates the element at [index] to the value returned by [transformer].
+  void transform(int index, _Transformer<T> transformer) {
+    assert(index != null && index >= 0 && index < length);
+    assert(transformer != null);
+
+    this[index] = transformer(this[index]);
+  }
+
+  /// Updates every element in the list to the value returned by [transformer].
+  void transformAll(_Transformer<T> transformer) {
+    assert(transformer != null);
+
+    for (var i = 0; i < length; i++) {
+      this[i] = transformer(this[i]);
+    }
+  }
+
+  /// Returns the number of instances there are of [object] in this list.
+  int count(T object) {
+    var count = 0;
+    for (var element in this) {
+      if (object == element) count++;
+    }
+    return count;
+  }
 }
 
 /// A generator supplied to the [resizeAndGenerate] extension method.
@@ -109,3 +135,6 @@ typedef _Generator<T> = T Function(int index);
 
 /// A function supplied to any methods that test the elements in the list.
 typedef _Test<T> = bool Function(T element);
+
+/// A function used to update the value of the element provided to it.
+typedef _Transformer<T> = T Function(T element);
