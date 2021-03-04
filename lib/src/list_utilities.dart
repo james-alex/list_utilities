@@ -34,7 +34,7 @@ extension ListUtilities<T> on List<T> {
   bool removeLastWhere(_Test<T> test) {
     assert(test != null);
 
-    for (var i = length - 1; i >= 0; i++) {
+    for (var i = length - 1; i >= 0; i--) {
       final element = this[i];
       if (test(element)) {
         removeAt(i);
