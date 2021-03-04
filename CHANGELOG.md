@@ -1,3 +1,13 @@
+## [0.1.2] - March 3, 2021
+
+* Added the [getRandom], [transform], [transformAll],
+and [count] methods to [ListUtilities].
+
+* Added the [getRandom], [removeFirst] and [removeLast]
+methods to [SetUtilities].
+
+* Fixed a bug in [removeLastWhere] in [ListUtilities].
+
 ## [0.1.2] - February 1, 2021
 
 * Added the `+` operator to [IterableUtilities].

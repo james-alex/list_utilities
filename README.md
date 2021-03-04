@@ -41,6 +41,16 @@ print(numbersA.matches(numbersB, ordered: true)); // false
 
 ## List Methods
 
+### getRandom
+
+The [getRandom] method returns a new set containing random
+elements from the set.
+
+```dart
+final numbers = [0, 1, 2, 3, 4];
+print(numbers.getRandom(3)); // [3, 1, 4] (or any other combination of numbers.)
+```
+
 ### removeRandom
 
 The [removeRandom] method removes and returns an element from
@@ -48,7 +58,7 @@ the list at random.
 
 ```dart
 final numbers = [0, 1, 2, 3, 4];
-print(numbers.removeFirst()); // 3 (or any of the  other numbers.)
+print(numbers.removeRandom()); // 3 (or any of the  other numbers.)
 print(numbers); // [0, 1, 2, 4]
 ```
 
@@ -148,7 +158,51 @@ numbers.removeFromEnd(2);
 print(numbers); // [0, 1, 2]
 ```
 
+### transform
+
+The [transform] method updates the element at the provided index to
+the value returned by the provided transformer.
+
+```dart
+final numbers = [0, 1, 2, 3, 4];
+numbers.transform(2, (number) => number * 2);
+print(numbers); // [0, 1, 4, 3, 4]
+```
+
+### transformAll
+
+The [transformAll] method updates every element in a list to
+the value returned by the provided transformer.
+
+```dart
+final numbers = [0, 1, 2, 3, 4];
+numbers.transformAll((number) => number * 2);
+print(numbers); // [0, 2, 4, 6, 8]
+```
+
+### count
+
+The [count] method returns the number of instances there are of the
+provided object in a list.
+
+```dart
+final numbers = [0, 0, 1, 2, 1, 0, 0];
+print(numbers.count(0)); // 4
+print(numbers.count(1)); // 2
+print(numbers.count(2)); // 1
+```
+
 ## Set Methods
+
+### getRandom
+
+The [getRandom] method returns a new set containing random
+elements from the set.
+
+```dart
+final numbers = {0, 1, 2, 3, 4};
+print(numbers.getRandom(3)); // {3, 1, 4} (or any other combination of numbers.)
+```
 
 ### removeRandom
 
@@ -157,13 +211,21 @@ the set at random.
 
 ```dart
 final numbers = {0, 1, 2, 3, 4};
-print(numbers.removeFirst()); // 3 (or any of the  other numbers.)
+print(numbers.removeRandom()); // 3 (or any of the other numbers.)
 print(numbers); // [0, 1, 2, 4]
 ```
 
 __Note:__ [removeRandom] is included on [List]s and [Set]s, but not [Iterables]
 because [Iterable]s lack methods to remove elements without first converting it
 to a [List] or [Set].
+
+### removeFirst
+
+TODO:
+
+### removeLast
+
+TODO:
 
 ### + operator
 

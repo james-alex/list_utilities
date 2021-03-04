@@ -12,6 +12,12 @@ void main() {
       }
     });
 
+    test('getRandom', () {
+      final list = <int>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+      final randomElements = list.getRandom(5);
+      expect(randomElements.toSet().length == 5, true);
+    });
+
     test('removeRandom', () {
       final list = <int>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
       while (list.isNotEmpty) {
@@ -125,6 +131,25 @@ void main() {
         }
       }
     });
+
+    test('transform', () {
+      final list = <int>[0, 1, 2, 3, 4];
+      list.transform(2, (element) => element * 2);
+      expect(list, equals(<int>[0, 1, 4, 3, 4]));
+    });
+
+    test('transformAll', () {
+      final list = <int>[0, 1, 2, 3, 4];
+      list.transformAll((element) => element * 2);
+      expect(list, equals(<int>[0, 2, 4, 6, 8]));
+    });
+
+    test('count', () {
+      final list = <int>[0, 1, 2, 0, 1, 0];
+      expect(list.count(0), equals(3));
+      expect(list.count(1), equals(2));
+      expect(list.count(2), equals(1));
+    });
   });
 
   group('SetUtilities', () {
@@ -142,11 +167,29 @@ void main() {
       }
     });
 
+    test('getRandom', () {
+      final numbers = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+      final randomNumbers = numbers.getRandom(5);
+      expect(randomNumbers.length, equals(5));
+    });
+
     test('removeRandom', () {
       final numbers = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
       while (numbers.isNotEmpty) {
         numbers.removeRandom();
       }
+    });
+
+    test('removeFirst', () {
+      final numbers = <int>{0, 1, 2, 3, 4};
+      expect(numbers.removeFirst(), equals(0));
+      expect(numbers.length, equals(4));
+    });
+
+    test('removeLast', () {
+      final numbers = <int>{0, 1, 2, 3, 4};
+      expect(numbers.removeLast(), equals(4));
+      expect(numbers.length, equals(4));
     });
 
     test('equals', () {
