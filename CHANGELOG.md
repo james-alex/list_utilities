@@ -1,3 +1,13 @@
+## [1.0.1] - March 26, 2021
+
+* Added the `base_list` library, which exports the [BaseList] class,
+an abstract class that implements [List] and all of its methods, intended
+to be used as a base class for higher-level implementations of [List].
+
+* Added the [exclude] and [excludeByIndex] methods to [ListUtilities].
+
+* Added the [subset], [exclude], and [excludeByIndex] methods to [SetUtilities].
+
 ## [1.0.0] - March 3, 2021
 
 * Migrated to null-safe code.

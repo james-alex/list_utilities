@@ -1,6 +1,6 @@
 name: list_utilities
 description: A collection of basic extension methods for Iterables, Lists, and Sets.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/james-alex/list_utilities
 
 environment:
