@@ -42,6 +42,15 @@ extension SetUtilities<T> on Set<T> {
     return element;
   }
 
+  /// Returns a new set containing the elements between [start] and [end].
+  Set<T> subset(int from, int? to) {
+    final elements = <T>{};
+    for (var i = from; i < (to ?? length); i++) {
+      elements.add(elementAt(i));
+    }
+    return elements;
+  }
+
   /// Returns a new list containing all of the elements in
   /// this list that aren't also contained within [subset].
   Set<T> exclude(Iterable<T> subset) {
