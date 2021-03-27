@@ -1,6 +1,7 @@
 # list_utilities
 
-A collection of basic extension methods for [Iterable]s, [List]s, and [Set]s.
+A collection of basic extension methods for [Iterable]s, [List]s, and [Set]s;
+and a library containing a base class for higher-level implementations of [List].
 
 __See:__ [num_utilities](https://pub.dev/packages/num_utilities)
 
@@ -212,7 +213,7 @@ the set at random.
 ```dart
 final numbers = {0, 1, 2, 3, 4};
 print(numbers.removeRandom()); // 3 (or any of the other numbers.)
-print(numbers); // [0, 1, 2, 4]
+print(numbers); // {0, 1, 2, 4}
 ```
 
 __Note:__ [removeRandom] is included on [List]s and [Set]s, but not [Iterables]
@@ -221,11 +222,25 @@ to a [List] or [Set].
 
 ### removeFirst
 
-TODO:
+The [removeFirst] method removes the first element in the set and
+returns the removed element.
+
+```dart
+final numbers = {0, 1, 2, 3, 4};
+print(numbers.removeFirst()); // 0
+print(numbers); // {1, 2, 3, 4}
+```
 
 ### removeLast
 
-TODO:
+The [removeLast] method removes the last element in the set and
+returns the removed element.
+
+```dart
+final numbers = {0, 1, 2, 3, 4};
+print(numbers.removeLast()); // 4
+print(numbers); // {0, 1, 2, 3}
+```
 
 ### + operator
 
@@ -237,3 +252,68 @@ final numbersA = {1, 2, 3};
 final numbersB = {4, 5, 6};
 print(numbersA + numbersB); // {1, 2, 3, 4, 5, 6}
 ```
+
+# base_list
+
+```dart
+import 'package:list_utilities/base_list.dart';
+```
+
+The `base_list` library exposes an abstract class, [BaseList], as well as a
+number of `typedef`s to use when overriding methods in an implementing class.
+
+[BaseList] implements `List<E>` and wraps another `List<E>`, [elements], that
+[BaseList]'s methods interface with.
+
+[BaseList] is intended to be used in cases where you need to implement a new
+type of list, but not every method necessary to implement a list needs to be
+customized.
+
+Unlike [List], [BaseList] requires [growable] as a parameter; which, depending
+on the implementation, doesn't necessarily equate to the wrapped list, [elements],
+being a fixed-length list or not.
+
+__Note:__ Overridden methods that modify the length of [elements] should respect
+[growable], and throw an [UnsupportedError] if the user tries to modify the length
+of the list, regardless of whether [elements] is a fixed-length list or not.
+
+```dart
+/// An implementation of `List<E>` that stores a list
+/// containing every element added to it, even if those
+/// elements have since been removed.
+class HistoryList<E> extends BaseList<E> {
+  const HistoryList() : super(<E>[], growable: true);
+
+  List<E> get history => List<E>.from(_history);
+
+  final _history = <E>[];
+
+  @override
+  void add(E value) {
+    elements.add(value);
+    _history.add(value);
+  }
+
+  @override
+  void addAll(Iterable<E> iterable) {
+    elements.addAll(iterable);
+    _history.addAll(iterable);
+  }
+
+  @override
+  void insert(int index, E element) {
+    elements.insert(index, element);
+    _history.add(element);
+  }
+
+  @override
+  void insertAll(int index, Iterable<E> iterable) {
+    elements.insertAll(index, iterable);
+    _history.addAll(iterable);
+  }
+}
+```
+
+__See:__ [labeled_list](https://pub.dev/packages/labeled_list) and
+[unique_list](https://pub.dev/packages/unique_list) for complete examples
+of how [BaseList] should be implemented.
