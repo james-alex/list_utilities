@@ -42,6 +42,26 @@ extension SetUtilities<T> on Set<T> {
     return element;
   }
 
+  /// Returns a new list containing all of the elements in
+  /// this list that aren't also contained within [subset].
+  Set<T> exclude(Iterable<T> subset) {
+    final elements = <T>{};
+    for (var element in this) {
+      if (!subset.contains(element)) elements.add(element);
+    }
+    return elements;
+  }
+
+  /// Returns a subset containing every element in this set,
+  /// excluding those at the defined [indexes].
+  Set<T> excludeByIndex(Iterable<int> indexes) {
+    final elements = <T>{};
+    for (var i = 0; i < length; i++) {
+      if (!indexes.contains(i)) elements.add(elementAt(i));
+    }
+    return elements;
+  }
+
   /// Returns a new [Set] from `this` with [other]'s elements
   /// appended to the end.
   Set<T> operator +(Iterable<T> other) => Set<T>.from(this)..addAll(other);

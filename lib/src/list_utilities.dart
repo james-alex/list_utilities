@@ -113,6 +113,26 @@ extension ListUtilities<T> on List<T> {
     }
     return count;
   }
+
+  /// Returns a new list containing all of the elements in
+  /// this list that aren't also contained within [subset].
+  List<T> exclude(Iterable<T> subset) {
+    final elements = <T>[];
+    for (var element in this) {
+      if (!subset.contains(element)) elements.add(element);
+    }
+    return elements;
+  }
+
+  /// Returns a sublist containing every element in this list,
+  /// excluding those at the defined [indexes].
+  List<T> excludeByIndex(Iterable<int> indexes) {
+    final elements = <T>[];
+    for (var i = 0; i < length; i++) {
+      if (!indexes.contains(i)) elements.add(elementAt(i));
+    }
+    return elements;
+  }
 }
 
 /// A generator supplied to the [resizeAndGenerate] extension method.
