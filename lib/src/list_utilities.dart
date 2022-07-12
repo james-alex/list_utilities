@@ -70,6 +70,19 @@ extension ListUtilities<T> on List<T> {
     removeRange(length - count, length);
   }
 
+  /// Removes and returns a range of elements from this list.
+  ///
+  /// The elements with positions greater than or equal to [start]
+  /// and less than [end], will be removed from the list.
+  /// This reduces the list's length by `end - start`.
+  List<T> pluck(int start, int? end) {
+    end ??= length;
+    assert(start >= 0 && start <= end && end <= length);
+    final subset = sublist(start, end);
+    removeRange(start, end);
+    return subset;
+  }
+
   /// Resizes the list by [resizeBy], setting the new elements to [fill]
   /// if [resizeBy] is positive, otherwise removing elements if [resizeBy]
   /// is negative.

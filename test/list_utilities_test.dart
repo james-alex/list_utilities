@@ -59,6 +59,13 @@ void main() {
       expect(list, orderedEquals(<int>[0, 1, 2, 4]));
     });
 
+    test('pluck', () {
+      final list = <int>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+      final slice = list.pluck(3, 8);
+      expect(list, orderedEquals(<int>[0, 1, 2, 8, 9]));
+      expect(slice, orderedEquals(<int>[3, 4, 5, 6, 7]));
+    });
+
     test('resizeAndFill', () {
       final list = List<int>.filled(5, 0, growable: true);
       list.resizeAndFill(5, 0);
@@ -196,6 +203,13 @@ void main() {
       final numbers = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
       numbers.removeRange(3, 8);
       expect(numbers, orderedEquals(<int>{0, 1, 2, 8, 9}));
+    });
+
+    test('pluck', () {
+      final numbers = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+      final slice = numbers.pluck(3, 8);
+      expect(numbers, orderedEquals(<int>{0, 1, 2, 8, 9}));
+      expect(slice, orderedEquals(<int>{3, 4, 5, 6, 7}));
     });
 
     test('equals', () {

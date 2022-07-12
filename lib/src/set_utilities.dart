@@ -61,6 +61,26 @@ extension SetUtilities<T> on Set<T> {
     }
   }
 
+  /// Removes and returns a range of elements from this set.
+  ///
+  /// The elements with positions greater than or equal to [start]
+  /// and less than [end], will be removed from the set.
+  /// This reduces the set's length by `end - start`.
+  ///
+  /// __Note:__ This method should not be used on unordered sets,
+  /// such as a [HashSet].
+  Set<T> pluck(int start, int? end) {
+    end ??= length;
+    assert(start >= 0 && start <= end && end <= length);
+    final subset = <T>{};
+    for (var i = 0; i < end - start; i++) {
+      final element = elementAt(start);
+      subset.add(element);
+      remove(element);
+    }
+    return subset;
+  }
+
   /// Returns a new set containing the elements between [start] and [end].
   Set<T> subset(int from, int? to) {
     final elements = <T>{};
