@@ -109,6 +109,18 @@ numbers.removeLastWhere((number) => number.isOdd);
 print(numbers); // [0, 1, 2, 4]
 ```
 
+### pluck
+
+The [pluck] method removes and returns a subset of the elements
+in the list from the element at [start] to the element at [end],
+or the end of the list if [end] is `null`.
+
+```dart
+final numbers = <int>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+print(numbers.pluck(3, 8)); // [3, 4, 5, 6, 7]
+print(numbers); // [0, 1, 2, 8, 9]
+```
+
 ### resizeAndFill
 
 The [resizeAndFill] method adds or removes elements from the list,
@@ -240,6 +252,32 @@ returns the removed element.
 final numbers = {0, 1, 2, 3, 4};
 print(numbers.removeLast()); // 4
 print(numbers); // {0, 1, 2, 3}
+```
+
+### removeRange
+
+The [removeRange] method removes a range of elements from the set.
+
+__Note:__ This method should not be used on unordered sets, such as a [HashSet].
+
+```dart
+final numbers = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+numbers.removeRange(3, 8);
+print(numbers); // {0, 1, 2, 8, 9}
+```
+
+### pluck
+
+The [pluck] method removes and returns a subset of the elements
+in the set from the element at [start] to the element at [end],
+or the end of the list if [end] is `null`.
+
+__Note:__ This method should not be used on unordered sets, such as a [HashSet].
+
+```dart
+final numbers = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+print(numbers.pluck(3, 8)); // {3, 4, 5, 6, 7}
+print(numbers); // {0, 1, 2, 8, 9}
 ```
 
 ### + operator
