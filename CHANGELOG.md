@@ -1,3 +1,9 @@
+## [1.0.2] - July 11, 2022
+
+* Added the [pluck] method to [ListUtilities] and [SetUtilities].
+
+* Added the [removeRange] method to [SetUtilities].
+
 ## [1.0.1] - March 26, 2021
 
 * Added the `base_list` library, which exports the [BaseList] class,
