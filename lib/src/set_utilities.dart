@@ -42,6 +42,25 @@ extension SetUtilities<T> on Set<T> {
     return element;
   }
 
+  /// Removes a range of elements from this set.
+  ///
+  /// Removes the elements with positions greater than or
+  /// equal to [start] and less than [end], from the set.
+  /// This reduces the set's length by `end - start`.
+  ///
+  /// The provided range, given by [start] and [end], must be valid.
+  /// A range from [start] to [end] is valid if `0 ≤ start ≤ end ≤ length`.
+  /// An empty range (with `end == start`) is valid.
+  ///
+  /// __Note:__ This method should not be used on unordered sets,
+  /// such as a [HashSet].
+  void removeRange(int start, int end) {
+    assert(start >= 0 && start <= end && end <= length);
+    for (var i = 0; i < end - start; i++) {
+      remove(elementAt(start));
+    }
+  }
+
   /// Returns a new set containing the elements between [start] and [end].
   Set<T> subset(int from, int? to) {
     final elements = <T>{};
