@@ -33,7 +33,7 @@ extension ListUtilities<T> on List<T> {
   T removeFirst() => removeAt(0);
 
   /// Removes the first element in this list that satisfies [test].
-  bool removeFirstWhere(_Test<T> test) {
+  bool removeFirstWhere(ListTester<T> test) {
     for (var element in this) {
       if (test(element)) {
         remove(element);
@@ -44,7 +44,7 @@ extension ListUtilities<T> on List<T> {
   }
 
   /// Removes the last element in this list that satisfies [test].
-  bool removeLastWhere(_Test<T> test) {
+  bool removeLastWhere(ListTester<T> test) {
     for (var i = length - 1; i >= 0; i--) {
       final element = this[i];
       if (test(element)) {
@@ -84,7 +84,7 @@ extension ListUtilities<T> on List<T> {
   /// Resizes the list by [resizeBy], setting the new elements with the
   /// [generator] if [resizeBy] is positive, otherwise removing elements
   /// if [resizeBy] is negative.
-  void resizeAndGenerate(int resizeBy, _Generator<T> generator) {
+  void resizeAndGenerate(int resizeBy, ListGenerator<T> generator) {
     if (resizeBy.isNegative) {
       removeFromEnd(-resizeBy);
     } else {
@@ -93,13 +93,13 @@ extension ListUtilities<T> on List<T> {
   }
 
   /// Updates the element at [index] to the value returned by [transformer].
-  void transform(int index, _Transformer<T> transformer) {
+  void transform(int index, ListTransformer<T> transformer) {
     assert(index >= 0 && index < length);
     this[index] = transformer(this[index]);
   }
 
   /// Updates every element in the list to the value returned by [transformer].
-  void transformAll(_Transformer<T> transformer) {
+  void transformAll(ListTransformer<T> transformer) {
     for (var i = 0; i < length; i++) {
       this[i] = transformer(this[i]);
     }
@@ -135,11 +135,11 @@ extension ListUtilities<T> on List<T> {
   }
 }
 
-/// A generator supplied to the [resizeAndGenerate] extension method.
-typedef _Generator<T> = T Function(int index);
+/// A generator function supplied to a list's [resizeAndGenerate] method.
+typedef ListGenerator<T> = T Function(int index);
 
 /// A function supplied to any methods that test the elements in the list.
-typedef _Test<T> = bool Function(T element);
+typedef ListTester<T> = bool Function(T element);
 
-/// A function used to update the value of the element provided to it.
-typedef _Transformer<T> = T Function(T element);
+/// A function supplied to any methods that transform the values in a list.
+typedef ListTransformer<T> = T Function(T element);
