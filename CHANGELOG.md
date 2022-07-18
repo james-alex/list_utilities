@@ -1,3 +1,9 @@
+## [1.0.3] - July 17, 2022
+
+* Added the shift method to [ListUtilities] and [SetUtilities].
+
+* Made the [end] parameter on [pluck] optional.
+
 ## [1.0.2] - July 11, 2022
 
 * Added the [pluck] method to [ListUtilities] and [SetUtilities].
