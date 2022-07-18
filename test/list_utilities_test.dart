@@ -59,6 +59,18 @@ void main() {
       expect(list, orderedEquals(<int>[0, 1, 2, 4]));
     });
 
+    test('shift', () {
+      final list = <int>[0, 1, 2, 3, 4];
+      list.shift(2);
+      expect(list, orderedEquals(<int>[3, 4, 0, 1, 2]));
+      list.shift(-2);
+      expect(list, orderedEquals(<int>[0, 1, 2, 3, 4]));
+      list.shift(12);
+      expect(list, orderedEquals(<int>[3, 4, 0, 1, 2]));
+      list.shift(-7);
+      expect(list, orderedEquals(<int>[0, 1, 2, 3, 4]));
+    });
+
     test('pluck', () {
       final list = <int>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
       final slice = list.pluck(3, 8);
@@ -203,6 +215,18 @@ void main() {
       final numbers = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
       numbers.removeRange(3, 8);
       expect(numbers, orderedEquals(<int>{0, 1, 2, 8, 9}));
+    });
+
+    test('shift', () {
+      final numbers = <int>{0, 1, 2, 3, 4};
+      numbers.shift(2);
+      expect(numbers, orderedEquals(<int>{3, 4, 0, 1, 2}));
+      numbers.shift(-2);
+      expect(numbers, orderedEquals(<int>{0, 1, 2, 3, 4}));
+      numbers.shift(12);
+      expect(numbers, orderedEquals(<int>{3, 4, 0, 1, 2}));
+      numbers.shift(-7);
+      expect(numbers, orderedEquals(<int>{0, 1, 2, 3, 4}));
     });
 
     test('pluck', () {
