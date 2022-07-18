@@ -61,6 +61,19 @@ extension SetUtilities<T> on Set<T> {
     }
   }
 
+  /// Shifts the order of the elements in this set by the provided [amount].
+  ///
+  /// __Note:__ This method should not be used on unordered sets,
+  /// such as a [HashSet].
+  void shift(int amount) {
+    amount %= length;
+    if (amount > 0) {
+      addAll(pluck(0, length - amount));
+    } else if (amount < 0) {
+      addAll(pluck(0, amount.abs()));
+    }
+  }
+
   /// Removes and returns a range of elements from this set.
   ///
   /// The elements with positions greater than or equal to [start]

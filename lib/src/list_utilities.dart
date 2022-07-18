@@ -70,6 +70,16 @@ extension ListUtilities<T> on List<T> {
     removeRange(length - count, length);
   }
 
+  /// Shifts the order of the elements by the provided [amount].
+  void shift(int amount) {
+    amount %= length;
+    if (amount > 0) {
+      insertAll(0, pluck(length - amount));
+    } else if (amount < 0) {
+      addAll(pluck(0, amount.abs()));
+    }
+  }
+
   /// Removes and returns a range of elements from this list.
   ///
   /// The elements with positions greater than or equal to [start]
