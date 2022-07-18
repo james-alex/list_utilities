@@ -21,7 +21,7 @@ any other implementation of [Iterable].
 The [random] method returns a random value from the iterable.
 
 ```dart
-final numbers = [0, 1, 2, 3, 4];
+final numbers = <int>[0, 1, 2, 3, 4];
 print(numbers.random()); // 3 (or any of the other numbers.)
 ```
 
@@ -34,8 +34,8 @@ as the calling iterable and contains all of the same elements.
 elements of each iterable to be in the same order to satisfy [matches].
 
 ```dart
-final numbersA = {1, 2, 3, 4, 5};
-final numbersB = {5, 4, 3, 2, 1};
+final numbersA = <int>{1, 2, 3, 4, 5};
+final numbersB = <int>{5, 4, 3, 2, 1};
 print(numbersA.matches(numbersB)); // true
 print(numbersA.matches(numbersB, ordered: true)); // false
 ```
@@ -48,7 +48,7 @@ The [getRandom] method returns a new set containing random
 elements from the set.
 
 ```dart
-final numbers = [0, 1, 2, 3, 4];
+final numbers = <int>[0, 1, 2, 3, 4];
 print(numbers.getRandom(3)); // [3, 1, 4] (or any other combination of numbers.)
 ```
 
@@ -58,7 +58,7 @@ The [removeRandom] method removes and returns an element from
 the list at random.
 
 ```dart
-final numbers = [0, 1, 2, 3, 4];
+final numbers = <int>[0, 1, 2, 3, 4];
 print(numbers.removeRandom()); // 3 (or any of the  other numbers.)
 print(numbers); // [0, 1, 2, 4]
 ```
@@ -72,7 +72,7 @@ first converting it to a [List] or [Set].
 The [removeNull] method removes all `null` values from the list.
 
 ```dart
-final numbers = [0, 1, null, 3, null];
+final numbers = <int>[0, 1, null, 3, null];
 numbers.removeNull();
 print(numbers); // [0, 1, 3]
 ```
@@ -82,7 +82,7 @@ print(numbers); // [0, 1, 3]
 The [removeFirst] method removes the first item from the list.
 
 ```dart
-final numbers = [0, 1, 2, 3, 4];
+final numbers = <int>[0, 1, 2, 3, 4];
 print(numbers.removeFirst()); // 0
 print(numbers); // [1, 2, 3, 4]
 ```
@@ -93,7 +93,7 @@ The [removeFirstWhere] method iterates through the list and removes
 the first element that satisfies the test.
 
 ```dart
-final numbers = [0, 1, 2, 3, 4];
+final numbers = <int>[0, 1, 2, 3, 4];
 numbers.removeFirstWhere((number) => number.isOdd);
 print(numbers); // [0, 2, 3, 4]
 ```
@@ -104,9 +104,24 @@ The [removeLastWhere] method iterates through the list in reverse and
 removes the first element that satisfies the test.
 
 ```dart
-final numbers = [0, 1, 2, 3, 4];
+final numbers = <int>[0, 1, 2, 3, 4];
 numbers.removeLastWhere((number) => number.isOdd);
 print(numbers); // [0, 1, 2, 4]
+```
+
+### shift
+
+The [shift] method shifts the order of the elements in the list.
+
+[shift] can be provided as a positive number to shift the elements
+up the list, or negative to shift the elements down the list.
+
+```dart
+final numbers = <int>[0, 1, 2, 3, 4];
+numbers.shift(2);
+print(numbers); // [3, 4, 0, 1, 2]
+numbers.shift(-3);
+print(numbers); // [1, 2, 3, 4, 0];
 ```
 
 ### pluck
@@ -127,7 +142,7 @@ The [resizeAndFill] method adds or removes elements from the list,
 setting any new values to the provided value.
 
 ```dart
-final numbers = [0, 1, 2, 3, 4];
+final numbers = <int>[0, 1, 2, 3, 4];
 numbers.resizeAndFill(-2, 0);
 print(numbers); // [0, 1, 2]
 numbers.resizeAndFill(2, 0);
@@ -140,7 +155,7 @@ The [resizeAndGenerate] method adds or removes elements from the list,
 setting any new values with the provided generator.
 
 ```dart
-final numbers = [0, 1, 2, 3, 4];
+final numbers = <int>[0, 1, 2, 3, 4];
 numbers.resizeAndGenerate(5, (index) => index);
 print(numbers); // [0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
 numbers.resizeAndGenerate(-5, (index) => index);
@@ -153,7 +168,7 @@ The [removeFrom] method removes the specified number of elements,
 starting at the provided index.
 
 ```dart
-final numbers = [0, 1, 2, 3, 4];
+final numbers = <int>[0, 1, 2, 3, 4];
 numbers.removeFrom(3, 2);
 print(numbers); // [0, 1, 2]
 numbers.removeFrom(0, 2);
@@ -166,7 +181,7 @@ The [removeFromEnd] method removes the specified number of elements
 from the end of the list.
 
 ```dart
-final numbers = [0, 1, 2, 3, 4];
+final numbers = <int>[0, 1, 2, 3, 4];
 numbers.removeFromEnd(2);
 print(numbers); // [0, 1, 2]
 ```
@@ -177,7 +192,7 @@ The [transform] method updates the element at the provided index to
 the value returned by the provided transformer.
 
 ```dart
-final numbers = [0, 1, 2, 3, 4];
+final numbers = <int>[0, 1, 2, 3, 4];
 numbers.transform(2, (number) => number * 2);
 print(numbers); // [0, 1, 4, 3, 4]
 ```
@@ -188,7 +203,7 @@ The [transformAll] method updates every element in a list to
 the value returned by the provided transformer.
 
 ```dart
-final numbers = [0, 1, 2, 3, 4];
+final numbers = <int>[0, 1, 2, 3, 4];
 numbers.transformAll((number) => number * 2);
 print(numbers); // [0, 2, 4, 6, 8]
 ```
@@ -199,7 +214,7 @@ The [count] method returns the number of instances there are of the
 provided object in a list.
 
 ```dart
-final numbers = [0, 0, 1, 2, 1, 0, 0];
+final numbers = <int>[0, 0, 1, 2, 1, 0, 0];
 print(numbers.count(0)); // 4
 print(numbers.count(1)); // 2
 print(numbers.count(2)); // 1
@@ -213,7 +228,7 @@ The [getRandom] method returns a new set containing random
 elements from the set.
 
 ```dart
-final numbers = {0, 1, 2, 3, 4};
+final numbers = <int>{0, 1, 2, 3, 4};
 print(numbers.getRandom(3)); // {3, 1, 4} (or any other combination of numbers.)
 ```
 
@@ -223,7 +238,7 @@ The [removeRandom] method removes and returns an element from
 the set at random.
 
 ```dart
-final numbers = {0, 1, 2, 3, 4};
+final numbers = <int>{0, 1, 2, 3, 4};
 print(numbers.removeRandom()); // 3 (or any of the other numbers.)
 print(numbers); // {0, 1, 2, 4}
 ```
@@ -238,7 +253,7 @@ The [removeFirst] method removes the first element in the set and
 returns the removed element.
 
 ```dart
-final numbers = {0, 1, 2, 3, 4};
+final numbers = <int>{0, 1, 2, 3, 4};
 print(numbers.removeFirst()); // 0
 print(numbers); // {1, 2, 3, 4}
 ```
@@ -249,7 +264,7 @@ The [removeLast] method removes the last element in the set and
 returns the removed element.
 
 ```dart
-final numbers = {0, 1, 2, 3, 4};
+final numbers = <int>{0, 1, 2, 3, 4};
 print(numbers.removeLast()); // 4
 print(numbers); // {0, 1, 2, 3}
 ```
@@ -264,6 +279,21 @@ __Note:__ This method should not be used on unordered sets, such as a [HashSet].
 final numbers = <int>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 numbers.removeRange(3, 8);
 print(numbers); // {0, 1, 2, 8, 9}
+```
+
+### shift
+
+The [shift] method shifts the order of the elements in the set.
+
+[shift] can be provided as a positive number to shift the elements
+up the set, or negative to shift the elements down the set.
+
+```dart
+final numbers = <int>{0, 1, 2, 3, 4};
+numbers.shift(2);
+print(numbers); // {3, 4, 0, 1, 2}
+numbers.shift(-3);
+print(numbers); // {1, 2, 3, 4, 0};
 ```
 
 ### pluck
@@ -286,8 +316,8 @@ The `+` operator returns a new [Set] by appending the second [Set]'s
 values to the end of the first [Set]s'.
 
 ```dart
-final numbersA = {1, 2, 3};
-final numbersB = {4, 5, 6};
+final numbersA = <int>{1, 2, 3};
+final numbersB = <int>{4, 5, 6};
 print(numbersA + numbersB); // {1, 2, 3, 4, 5, 6}
 ```
 
