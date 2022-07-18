@@ -69,7 +69,7 @@ extension SetUtilities<T> on Set<T> {
   ///
   /// __Note:__ This method should not be used on unordered sets,
   /// such as a [HashSet].
-  Set<T> pluck(int start, int? end) {
+  Set<T> pluck(int start, [int? end]) {
     end ??= length;
     assert(start >= 0 && start <= end && end <= length);
     final subset = <T>{};

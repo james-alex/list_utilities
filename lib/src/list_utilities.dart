@@ -75,7 +75,7 @@ extension ListUtilities<T> on List<T> {
   /// The elements with positions greater than or equal to [start]
   /// and less than [end], will be removed from the list.
   /// This reduces the list's length by `end - start`.
-  List<T> pluck(int start, int? end) {
+  List<T> pluck(int start, [int? end]) {
     end ??= length;
     assert(start >= 0 && start <= end && end <= length);
     final subset = sublist(start, end);
